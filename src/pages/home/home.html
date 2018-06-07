@@ -1,14 +1,56 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      See List
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content>
+
+  <ion-card *ngFor ="let movie of movieList">
+      <ion-icon id="close-circle" name="close-circle"></ion-icon>
+      <ion-card-header><h1>{{movie.Title}} ({{movie.Year}})</h1>
+      <h5>Directed by {{movie.Director}}</h5></ion-card-header>
+      <img src="{{movie.Poster}}" alt="Movie Poster">
+      <p>{{movie.Plot}}</p>
+      <ion-grid>
+        <ion-row text-center>
+         
+          <ion-col *ngIf="movie.Ratings[0]">
+            {{imdbSvg}}
+            <br>{{movie.Ratings[0].Value}}
+          </ion-col>
+         
+          <ion-col *ngIf="movie.Ratings[1]">
+            <svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#"
+              xmlns:dc="http://purl.org/dc/elements/1.1/" id="svg3565" height="140" viewBox="0 0 145 140" width="100%" version="1.1">
+              <path id="path3575" d="m47.4 35.342c-13.607-7.935-12.32-25.203 2.097-31.88 26.124-6.5314 29.117 13.78 22.652 30.412-6.5416 24.11 18.095 23.662 19.925 10.067 3.6048-18.412 19.394-26.695 31.67-16.359 12.598 12.135 7.0735 36.581-17.827 34.187-16.03-1.5447-19.552 19.585 0.83894 21.183 32.228 1.9146 42.491 22.167 31.041 35.865-15.994 15.15-37.692-4.4389-45.513-19.505-6.7999-9.3072-17.321 0.11036-13.423 6.5018 12.983 19.465 2.9229 31.229-10.906 30.621-13.369-0.85-20.96-9.06-13.214-29.15 3.897-12.482-8.595-15.387-16.569-5.45-11.708 19.61-28.866 13.68-33.977 4.19-3.2426-7.622-2.921-25.847 24.119-23.697 16.688 4.137 11.776-12.561-0.629-13.633-9.246-0.443-30.502-7.304-22.861-24.539 7.341-11.057 24.958-11.769 33.348 6.292 3.0371 4.2326 8.3614 11.042 18.037 5.0336 3.51-5.1979 1.2108-13.901-8.8089-20.135z"
+                fill="#000000"/>
+            </svg>
+            <br>{{movie.Ratings[1].Value}}
+          </ion-col>
+
+          <ion-col *ngIf="movie.Ratings[2]">
+              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.2 83.2"><path d="M44,2.4A41.6,41.6,0,1,0,85.6,44,41.59,41.59,0,0,0,44,2.4ZM71,43,54.73,28c-2.82-2.6-4.87-4-6.18-4.27A4.9,4.9,0,0,0,44,25.38a6.86,6.86,0,0,0-1.8,3.82,7,7,0,0,0,1,4.57,27.44,27.44,0,0,0,5.29,6L62,52.38l-7,7.41L39.48,45.42c-2.77-2.55-4.67-4.06-5.72-4.54a4.78,4.78,0,0,0-2.95-.43,5.48,5.48,0,0,0-2.72,1.71,7.37,7.37,0,0,0-2,4A6.86,6.86,0,0,0,27,50.56a27.34,27.34,0,0,0,5.3,6L46,69.3l-7,7.4L10.65,50.49l6.45-6.82L21,47.25q-1.05-7.84,3.73-12.89a13,13,0,0,1,5.53-3.63,12,12,0,0,1,6.46-.11,17.47,17.47,0,0,1,.37-7.11,13.28,13.28,0,0,1,3.19-5.59,14,14,0,0,1,6.2-4.05,10.76,10.76,0,0,1,6.74.26q2.55.91,6.61,4.66L78,35.55Z" transform="translate(-2.4 -2.4)"/></svg>
+            
+            <br>{{movie.Ratings[2].Value}}
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+  </ion-card>
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-searchbar type="string" placeholder="Search Movie to Add" [(ngModel)]="movie" (ionCancel)="onCancel($event)"></ion-searchbar>
+      <button id="search-button" (click)="searchForMovie()" ion-button>
+        <ion-icon name="search"></ion-icon>
+      </button>
+  </ion-toolbar>
+</ion-footer>
+
+

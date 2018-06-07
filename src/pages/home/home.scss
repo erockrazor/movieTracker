@@ -1,3 +1,46 @@
 page-home {
+    ion-card{
+        p{
+            padding: 20px 10px 5px 10px;
+        }
+        svg{
+            height: 50px;
+            width: 100%;
+        }
+        #close-circle {
+            float: right;
+            color: black;
+            font-size: 1.5em;
+            width: 15%;
+            height: 44px;
+            background-color:transparent;
+            box-shadow: none;
+        }
+    }
 
+
+    ion-searchbar{
+        position: fixed;
+        bottom: 10%;
+        left: 1%;
+        width: 85%;
+        .searchbar-search-icon{
+            display:none;
+        }
+        .searchbar-input{
+            padding: 6px 20px !important;
+        }
+    }
+
+    #search-button{
+        position: fixed;
+        color: black;
+        bottom: 3%;
+        right: 1%;
+        font-size: 1.5em;
+        width: 15%;
+        height: 44px;
+        background-color:transparent;
+        box-shadow: none;
+    }
 }
