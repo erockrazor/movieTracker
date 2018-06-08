@@ -10,8 +10,8 @@ page-home {
         #close-circle {
             float: right;
             color: black;
-            font-size: 1.5em;
-            width: 15%;
+            font-size: 3em;
+            padding: 4% 3% 0 0; 
             height: 44px;
             background-color:transparent;
             box-shadow: none;
@@ -35,7 +35,7 @@ page-home {
     #search-button{
         position: fixed;
         color: black;
-        bottom: 3%;
+        bottom: 7%;
         right: 1%;
         font-size: 1.5em;
         width: 15%;
