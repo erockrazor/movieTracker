@@ -17,10 +17,26 @@ import 'rxjs/add/operator/map';
 export class MovieApiProvider {
 
   apiKey = '976955ea';
+  url: any;
+  movies: any;
 
   constructor(public http: HttpClient) {
     console.log('Hello MovieApiProvider Provider');
 
+  }
+
+  movieAutoComplete(movie){
+    let url = 'http://www.omdbapi.com/?s=' + encodeURI(movie) + '&apikey=' + this.apiKey;
+    let movies = this.http.get(url)
+    console.log(movies);
+    for (const key in movies) {
+      if (movies.hasOwnProperty(key)) {
+        const element = movies[key].title;
+        console.log(element);
+        movies[key] = element;
+      }
+    }
+    return this.movies;
   }
 
   getMovie(movie) {

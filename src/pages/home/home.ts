@@ -7,7 +7,6 @@ import { MovieApiProvider } from '../../providers/movie-api/movie-api';
 import { AlertController } from 'ionic-angular';
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -41,11 +40,22 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
       this.movieList = data;
       console.log(this.movieList);
     });
+    console.log('about to search for autocomplete');
+    this.movieApi.movieAutoComplete('help');
   }
 
   saveMoviesToSeeList(movie){
     console.log('saving the movie to see list');
     this.db.object(this.userId + '/movies/' +this.movieDetails.Title).set(this.movieDetails);
+  }
+
+  searchForAutoComplete(){
+      let movie: any;
+      this.movieApi.movieAutoComplete(this.movie)
+        .subscribe(movieResponse => {
+          console.log(movieResponse);
+          movie = movieResponse;
+        })
   }
 
   searchForMovie(){
