@@ -13,28 +13,18 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-row class="logo-row">
-     <ion-col></ion-col>
-     <!-- <ion-col width-67>
-       <img src="http://placehold.it/300x200"/>
-     </ion-col> -->
-     <ion-col></ion-col>
-   </ion-row>
+<ion-content padding align-items-center>
    <div class="login-box">
      <form (ngSubmit)="login()" #registerForm="ngForm">
-       <ion-row>
+        <ion-row>
          <ion-col>
            <ion-list inset>
-
              <ion-item>
                <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="acc.email" required></ion-input>
              </ion-item>
-
              <ion-item>
                <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="acc.password" required></ion-input>
              </ion-item>
-
            </ion-list>
          </ion-col>
        </ion-row>

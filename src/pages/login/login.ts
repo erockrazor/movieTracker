@@ -4,6 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePage } from '../home/Home';
 import { ViewChild } from '@angular/core/src/metadata/di';
+import { Storage } from '@ionic/storage';
 
 
 /**
@@ -21,12 +22,45 @@ export class LoginPage {
   acc:any = {};
   user:any; 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alert: AlertController, public auth: AngularFireAuth, public db:AngularFireDatabase) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public alert: AlertController, 
+    public auth: AngularFireAuth, 
+    public db:AngularFireDatabase,
+    private storage: Storage) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+
   }
+
+  ionViewDidEnter() {
+    this.storage.get('email').then((val) => {
+      if (val != null) {
+        console.log('email ' + val);
+        this.acc.email = val;
+      }
+      else {
+        console.log("Null or Undefined value err :", val)
+      }
+    }, err => {
+      console.log("Storage error : ", err)
+    });
+    this.storage.get('password').then((val) => {
+      if (val != null) {
+        console.log('email ' + val);
+        this.acc.password = val;
+      }
+      else {
+        console.log("Null or Undefined value err :", val)
+      }
+    }, err => {
+      console.log("Storage error : ", err)
+    });
+  }
+
 
   createAccount(){
     this.auth.auth
@@ -36,7 +70,7 @@ export class LoginPage {
                   displayName: this.acc.displayName,
                   photoURL: null
               });
-        console.log(res)
+        console.log(res);
       })
       .catch(res => {
         console.log(res)
@@ -59,6 +93,8 @@ export class LoginPage {
         this.navCtrl.setRoot(HomePage,{
           user: res.uid
         })
+        this.storage.set('email', this.acc.email);
+        this.storage.set('password', this.acc.password);
       })
       .catch(res => {
         console.log(res)

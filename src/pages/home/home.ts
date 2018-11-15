@@ -7,6 +7,7 @@ import { MovieApiProvider } from '../../providers/movie-api/movie-api';
 import { AlertController } from 'ionic-angular';
 
 
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
