@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { LoginPage } from '../login/login'
 import { MovieApiProvider } from '../../providers/movie-api/movie-api';
 import { AlertController } from 'ionic-angular';
 
@@ -18,6 +17,10 @@ movie: string;
 movieQuery: any;
 movieList: any;
 movieDetails: any;
+movies: any; 
+autoCompleteList: any;
+
+
 
 constructor(public navCtrl: NavController, public navParams: NavParams, public auth: AngularFireAuth, private movieApi: MovieApiProvider, private alertCtrl: AlertController, private db:AngularFireDatabase) {
     
@@ -51,12 +54,21 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
   }
 
   searchForAutoComplete(){
-      let movie: any;
-      this.movieApi.movieAutoComplete(this.movie)
+    if (this.movie.length > 3) {   
+    this.movieApi.movieAutoComplete(this.movie)
         .subscribe(movieResponse => {
           console.log(movieResponse);
-          movie = movieResponse;
-        })
+          this.movies = movieResponse;
+          console.log(this.movies);
+          if(this.movies.Response = 'True'){
+            for (let i = 0; i < this.movies.Search.length; i++) {
+              this.autoCompleteList[i] = this.movies.Search[i].Title;
+              console.log(this.movies.Search[i].Title);
+            }
+          }
+          console.log(this.autoCompleteList);   
+        });
+    }
   }
 
   searchForMovie(){

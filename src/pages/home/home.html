@@ -46,7 +46,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-searchbar type="string" placeholder="Search Movie to Add" [(ngModel)]="movie" (ionCancel)="onCancel($event)"></ion-searchbar>
+    <ion-input type="string" placeholder="Search Movie to Add" [(ngModel)]="movie" (keyup)="searchForAutoComplete()" (ionCancel)="onCancel($event)"></ion-input>
       <button id="search-button" (click)="searchForMovie()" ion-button>
         <ion-icon name="search"></ion-icon>
       </button>

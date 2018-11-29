@@ -26,17 +26,8 @@ export class MovieApiProvider {
   }
 
   movieAutoComplete(movie){
-    let url = 'http://www.omdbapi.com/?s=' + encodeURI(movie) + '&apikey=' + this.apiKey;
-    let movies = this.http.get(url)
-    console.log(movies);
-    for (const key in movies) {
-      if (movies.hasOwnProperty(key)) {
-        const element = movies[key].title;
-        console.log(element);
-        movies[key] = element;
-      }
-    }
-    return this.movies;
+      let url = 'http://www.omdbapi.com/?s=' + encodeURI(movie) + '&apikey=' + this.apiKey;
+      return this.http.get(url);
   }
 
   getMovie(movie) {
