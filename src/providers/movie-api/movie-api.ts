@@ -26,8 +26,12 @@ export class MovieApiProvider {
   }
 
   movieAutoComplete(movie){
+    return new Promise(( resolve ) => {
       let url = 'http://www.omdbapi.com/?s=' + encodeURI(movie) + '&apikey=' + this.apiKey;
-      return this.http.get(url);
+      this.http.get(url).subscribe((result) => {
+        resolve(result);  
+      });
+    });
   }
 
   getMovie(movie) {

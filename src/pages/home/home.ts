@@ -18,7 +18,7 @@ movieQuery: any;
 movieList: any;
 movieDetails: any;
 movies: any; 
-autoCompleteList: any;
+autoCompleteList: any = [];
 
 
 
@@ -55,15 +55,15 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
 
   searchForAutoComplete(){
     if (this.movie.length > 3) {   
-    this.movieApi.movieAutoComplete(this.movie)
-        .subscribe(movieResponse => {
+      this.movieApi.movieAutoComplete(this.movie)
+        .then((movieResponse:any )=> {
           console.log(movieResponse);
-          this.movies = movieResponse;
-          console.log(this.movies);
-          if(this.movies.Response = 'True'){
-            for (let i = 0; i < this.movies.Search.length; i++) {
-              this.autoCompleteList[i] = this.movies.Search[i].Title;
-              console.log(this.movies.Search[i].Title);
+          if (movieResponse.Response == 'True'){
+            this.autoCompleteList = [];
+            for (let i = 0; i < movieResponse.Search.length; i++) {
+              if(i > 4) break;
+              this.autoCompleteList.push(movieResponse.Search[i].Title);
+              // this.autoCompleteList.push(movieResponse.Search[i].Year);
             }
           }
           console.log(this.autoCompleteList);   
@@ -71,9 +71,10 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
     }
   }
 
-  searchForMovie(){
-    let movie: any;
-    this.movieApi.getMovie(this.movie)
+
+  searchForMovie(movie){
+    this.autoCompleteList = [];
+    this.movieApi.getMovie(movie)
       .subscribe(movieResponse => {
         console.log(movieResponse);
         movie = movieResponse;
@@ -93,10 +94,10 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public a
               {
                 text: 'Add Movie',
                 handler: () => {
-
                   this.movieDetails = movie;
                   console.log('Add To See List');
                   this.saveMoviesToSeeList(movie.Title);
+                  this.movie = "";
                 }
               }
             ]

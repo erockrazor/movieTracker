@@ -8,11 +8,22 @@
 
 
 <ion-content>
-
   <ion-card *ngFor ="let movie of movieList">
-      <ion-icon id="close-circle" (click)="deleteMovieFromSeeList(movie.Title)" name="close-circle"></ion-icon>
-      <ion-card-header><h1>{{movie.Title}} ({{movie.Year}})</h1>
-      <h5>Directed by {{movie.Director}}</h5></ion-card-header>
+    <ion-card-header>
+      <ion-grid no-padding>
+        <ion-row no-padding>
+          <ion-col no-padding col-10>
+            <div no-padding text-wrap>
+              <h2><b>{{movie.Title}} ({{movie.Year}})</b></h2>
+              <h5>Directed by {{movie.Director}}</h5>
+            </div>
+          </ion-col>
+          <ion-col col-2>
+            <ion-icon id="close-circle" (click)="deleteMovieFromSeeList(movie.Title)" name="close-circle"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
       <img src="{{movie.Poster}}" alt="Movie Poster">
       <p>{{movie.Plot}}</p>
       <ion-grid>
@@ -41,6 +52,11 @@
         </ion-row>
       </ion-grid>
   </ion-card>
+  <ion-grid id="auto-complete">
+    <ion-row *ngFor="let movie of autoCompleteList">
+       <p (click)="searchForMovie(movie)">{{movie}}</p>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>
 
